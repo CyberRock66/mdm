@@ -28,12 +28,12 @@ export const Header = () => (
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/">
+            <a className="nav-link" href="/auth/login">
               Sign in
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/">
+            <a className="nav-link" href="/auth/register">
               Sign up
             </a>
           </li>
