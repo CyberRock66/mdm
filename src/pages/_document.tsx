@@ -3,7 +3,6 @@ import { Html, Head, Main, NextScript } from 'next/document';
 export const Document = () => (
   <Html lang="en">
     <Head>
-      <title>Conduit</title>
       <link
         href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
         rel="stylesheet"
@@ -15,6 +14,7 @@ export const Document = () => (
         type="text/css"
       />
       <link rel="stylesheet" href="//demo.productionready.io/main.css" />
+      <title>Conduit-clone</title>
     </Head>
     <body>
       <Main />
