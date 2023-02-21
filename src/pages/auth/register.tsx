@@ -1,3 +1,4 @@
+import { Registration } from '@/features/auth';
 import { BaseLayout } from '@/layouts';
 
 export const RegisterPage = () => (
@@ -15,35 +16,7 @@ export const RegisterPage = () => (
               <li>That email is already taken</li>
             </ul> */}
 
-            <form>
-              <fieldset className="form-group">
-                <input
-                  className="form-control form-control-lg"
-                  type="text"
-                  placeholder="Your Name"
-                />
-              </fieldset>
-              <fieldset className="form-group">
-                <input
-                  className="form-control form-control-lg"
-                  type="text"
-                  placeholder="Email"
-                />
-              </fieldset>
-              <fieldset className="form-group">
-                <input
-                  className="form-control form-control-lg"
-                  type="password"
-                  placeholder="Password"
-                />
-              </fieldset>
-              <button
-                type="submit"
-                className="btn btn-lg btn-primary pull-xs-right"
-              >
-                Sign up
-              </button>
-            </form>
+            <Registration />
           </div>
         </div>
       </div>

@@ -6,5 +6,4 @@ export const conduitBaseQuery = fetchBaseQuery({
     headers.set('Accept', `application/json`);
     return headers;
   },
-  credentials: 'include',
 });
