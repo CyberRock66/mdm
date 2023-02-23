@@ -12,10 +12,6 @@ export const RegisterPage = () => (
               <a href="/auth/login">Have an account?</a>
             </p>
 
-            {/* <ul className="error-messages">
-              <li>That email is already taken</li>
-            </ul> */}
-
             <Registration />
           </div>
         </div>

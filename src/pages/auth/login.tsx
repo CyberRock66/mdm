@@ -1,3 +1,4 @@
+import { Login } from '@/features/auth';
 import { BaseLayout } from '@/layouts';
 
 export const LoginPage = () => (
@@ -11,35 +12,7 @@ export const LoginPage = () => (
               <a href="/auth/register"> Need an account?</a>
             </p>
 
-            <form>
-              <fieldset className="form-group">
-                <input
-                  className="form-control form-control-lg"
-                  type="text"
-                  placeholder="Your Name"
-                />
-              </fieldset>
-              <fieldset className="form-group">
-                <input
-                  className="form-control form-control-lg"
-                  type="text"
-                  placeholder="Email"
-                />
-              </fieldset>
-              <fieldset className="form-group">
-                <input
-                  className="form-control form-control-lg"
-                  type="password"
-                  placeholder="Password"
-                />
-              </fieldset>
-              <button
-                type="submit"
-                className="btn btn-lg btn-primary pull-xs-right"
-              >
-                Sign in
-              </button>
-            </form>
+            <Login />
           </div>
         </div>
       </div>
