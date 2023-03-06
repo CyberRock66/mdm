@@ -5,25 +5,43 @@ import { ILogin } from './Login.model';
 import { loginFormSchema } from './Login.schema';
 
 export const Login = () => {
-  const [registrationRequest] = useLoginMutation();
+  const [loginRequest, { isLoading }] = useLoginMutation();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
+    reset,
   } = useForm<ILogin>({
     resolver: yupResolver(loginFormSchema),
-    mode: 'onChange',
+    mode: 'onBlur',
   });
   const onSubmit: SubmitHandler<ILogin> = async (formData) => {
-    await registrationRequest({ ...formData })
+    await loginRequest({ ...formData })
       .unwrap()
-      .then((res) => console.log(res));
+      .then(() => reset())
+      .catch((e) => {
+        const errorsValue = e.data.errors;
+
+        if (errorsValue) {
+          setError('user', {
+            type: 'server',
+            message: `email or password is invalid`,
+          });
+        }
+      });
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      {errors.user && (
+        <ul className="error-messages">
+          <li>{errors.user?.message}</li>
+        </ul>
+      )}
       <fieldset className="form-group">
         <input
+          disabled={isLoading}
           className="form-control form-control-lg"
           type="text"
           placeholder="Email"
@@ -32,13 +50,18 @@ export const Login = () => {
       </fieldset>
       <fieldset className="form-group">
         <input
+          disabled={isLoading}
           className="form-control form-control-lg"
           type="password"
           placeholder="Password"
           {...register('user.password')}
         />
       </fieldset>
-      <button type="submit" className="btn btn-lg btn-primary pull-xs-right">
+      <button
+        disabled={isLoading}
+        type="submit"
+        className="btn btn-lg btn-primary pull-xs-right"
+      >
         Sign in
       </button>
     </form>

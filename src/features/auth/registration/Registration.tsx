@@ -5,11 +5,12 @@ import { IRegistration } from './Registration.model';
 import { registrationFormSchema } from './Registration.schema';
 
 export const Registration = () => {
-  const [registrationRequest] = useRegistrationMutation();
+  const [registrationRequest, { isLoading }] = useRegistrationMutation();
   const {
     register,
     handleSubmit,
     setError,
+    reset,
     formState: { errors },
   } = useForm<IRegistration>({
     resolver: yupResolver(registrationFormSchema),
@@ -18,7 +19,7 @@ export const Registration = () => {
   const onSubmit: SubmitHandler<IRegistration> = async (formData) => {
     await registrationRequest({ ...formData })
       .unwrap()
-      .then((res) => console.log(res))
+      .then(() => reset())
       .catch((e) => {
         const errorsValue = e.data.errors;
 
@@ -51,13 +52,14 @@ export const Registration = () => {
           <li>
             {errors.user?.username?.message ||
               errors.user?.email?.message ||
-              'Invaliad username or email or password'}
+              errors.user?.password?.message}
           </li>
         </ul>
       )}
 
       <fieldset className="form-group">
         <input
+          disabled={isLoading}
           className="form-control form-control-lg"
           type="text"
           placeholder="Your Name"
@@ -66,6 +68,7 @@ export const Registration = () => {
       </fieldset>
       <fieldset className="form-group">
         <input
+          disabled={isLoading}
           className="form-control form-control-lg"
           type="text"
           placeholder="Email"
@@ -74,13 +77,18 @@ export const Registration = () => {
       </fieldset>
       <fieldset className="form-group">
         <input
+          disabled={isLoading}
           className="form-control form-control-lg"
           type="password"
           placeholder="Password"
           {...register('user.password')}
         />
       </fieldset>
-      <button type="submit" className="btn btn-lg btn-primary pull-xs-right">
+      <button
+        disabled={isLoading}
+        type="submit"
+        className="btn btn-lg btn-primary pull-xs-right"
+      >
         Sign up
       </button>
     </form>
